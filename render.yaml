@@ -1,0 +1,15 @@
+services:
+  - type: web
+    name: contador
+    runtime: node
+    plan: free
+    buildCommand: echo "sem build"
+    startCommand: node server.js
+    autoDeploy: true
+    envVars:
+      - key: SUPABASE_URL
+        sync: false
+      - key: SUPABASE_SERVICE_KEY
+        sync: false
+      - key: ADMIN_PASSWORD
+        sync: false
