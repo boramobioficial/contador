@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Portal do Cliente | Contabilidade</title>
+<meta name="description" content="Acompanhe boletos, documentos e chamados da sua empresa em tempo real.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<main id="login-view" class="login-wrap">
+  <form class="login" id="login-form" autocomplete="off">
+    <div class="logo">📊</div>
+    <h1>Portal do Cliente</h1>
+    <p class="mut">Acesse com o CNPJ da sua empresa.</p>
+    <label for="cnpj">CNPJ</label>
+    <input id="cnpj" inputmode="numeric" placeholder="00.000.000/0000-00" maxlength="18" required>
+    <label for="senha">Senha</label>
+    <input id="senha" type="password" placeholder="••••••" required>
+    <div class="err" id="login-err"></div>
+    <button class="btn block" id="btn-entrar">Entrar</button>
+    <p class="mut" style="font-size:12px;margin-top:18px;text-align:center">Primeiro acesso? Use a senha provisória informada pelo escritório.</p>
+  </form>
+</main>
+
+<div id="app-view" class="app hidden">
+  <aside class="side">
+    <div class="brand"><div class="logo">📊</div>Contabilidade</div>
+    <nav class="nav" id="nav">
+      <button data-p="inicio" class="on"><span>🏠</span>Início</button>
+      <button data-p="boletos"><span>💳</span>Boletos</button>
+      <button data-p="arquivos"><span>📁</span>Arquivos</button>
+      <button data-p="chamados"><span>🎧</span>Chamados</button>
+      <button data-p="perfil"><span>👤</span>Perfil</button>
+    </nav>
+    <div class="who"><b id="who-nome"></b><div class="mut" id="who-cnpj"></div><button class="btn ghost sm" id="sair" style="margin-top:10px;width:100%">Sair</button></div>
+  </aside>
+  <section class="main" id="main"></section>
+</div>
+<script src="app.js"></script>
+</body>
+</html>

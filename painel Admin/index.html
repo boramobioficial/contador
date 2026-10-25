@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Painel Administrativo | Contabilidade</title>
+<meta name="description" content="Gestão de clientes, boletos, arquivos e chamados do escritório contábil.">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<main id="login-view" class="login-wrap">
+  <form class="login" id="login-form">
+    <div class="logo" style="background:linear-gradient(135deg,#b48cff,#22a6f2)">🛡️</div>
+    <h1>Painel Admin</h1>
+    <p class="mut">Acesso restrito ao escritório.</p>
+    <label for="usr">Usuário</label><input id="usr" required>
+    <label for="pwd">Senha</label><input id="pwd" type="password" required>
+    <div class="err" id="login-err"></div>
+    <button class="btn block">Entrar</button>
+  </form>
+</main>
+<div id="app-view" class="app hidden">
+  <aside class="side">
+    <div class="brand"><div class="logo">🛡️</div>Admin</div>
+    <nav class="nav" id="nav">
+      <button data-p="dashboard" class="on"><span>📈</span>Visão geral</button>
+      <button data-p="novo"><span>➕</span>Cadastrar usuário</button>
+      <button data-p="clientes"><span>🏢</span>Clientes</button>
+      <button data-p="boletos"><span>💳</span>Boletos</button>
+      <button data-p="arquivos"><span>📁</span>Arquivos</button>
+      <button data-p="chamados"><span>🎧</span>Chamados<span class="badge hidden" id="bd-ch"></span></button>
+      <button data-p="config"><span>⚙️</span>Config</button>
+    </nav>
+    <div class="who"><b>Administrador</b><button class="btn ghost sm" id="sair" style="margin-top:10px;width:100%">Sair</button></div>
+  </aside>
+  <section class="main" id="main"></section>
+</div>
+<script src="app.js"></script>
+</body>
+</html>

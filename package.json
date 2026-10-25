@@ -1,0 +1,9 @@
+{
+  "name": "contador",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Portal do cliente + painel admin para escritório de contabilidade",
+  "main": "server.js",
+  "scripts": { "start": "node server.js" },
+  "engines": { "node": ">=18" }
+}
