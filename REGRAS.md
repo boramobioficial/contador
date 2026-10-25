@@ -60,3 +60,22 @@ Documento de referência do projeto. Atualize sempre que uma regra mudar.
 ## 9. Links (produção)
 - Cliente: https://sandcontabilidade.onrender.com/
 - Admin: https://sandcontabilidade.onrender.com/admin/
+
+
+## 10. Links acesso (produção)
+conta de acesso
+- estou usando a conta : boramobioficial@gamil.com
+
+
+## 11. Links acesso (produção)
+
+https://supabase.com/dashboard/project/uhnkslaqljsqhvqnwgvh/editor
+
+Projects | boramobioficial's Org | Supabase
+boramobioficial
+boramobioficial@gmail.com
+
+
+
+## 12. Links acesso (Hospedagem)
+https://dashboard.render.com/web/srv-dbf0cjks728c73dm76gg

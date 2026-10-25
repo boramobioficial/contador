@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Painel Administrativo | Sand Contabilidade - Centro de Controle</title>
+  <meta name="description" content="Central de gerenciamento do escritório: controle de clientes, emissão de boletos, upload de guias e atendimento de chamados.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #060b14;
+      --card-bg: rgba(15, 23, 42, 0.75);
+      --card-border: rgba(148, 163, 184, 0.12);
+      --card-hover: rgba(56, 189, 248, 0.35);
+      --txt: #f8fafc;
+      --txt-mut: #94a3b8;
+      --pri: #38bdf8;
+      --pri-glow: rgba(56, 189, 248, 0.35);
+      --purple: #a855f7;
+      --emerald: #10b981;
+      --grad: linear-gradient(135deg, #38bdf8 0%, #a855f7 100%);
+      --max-w: 1200px;
+    }
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family: 'Plus Jakarta Sans', 'Inter', sans-serif;
+      background: radial-gradient(1100px 600px at 50% -10%, rgba(168, 85, 247, 0.15), transparent 70%),
+                  radial-gradient(900px 500px at 10% 40%, rgba(56, 189, 248, 0.12), transparent 70%),
+                  var(--bg);
+      color: var(--txt);
+      min-height: 100vh;
+      line-height: 1.6;
+    }
+    a { color: inherit; text-decoration: none; }
+    .container { max-width: var(--max-w); margin: 0 auto; padding: 0 24px; }
+
+    /* Header Nav */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(16px);
+      background: rgba(6, 11, 20, 0.8);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      padding: 18px 0;
+    }
+    .nav-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 20px;
+      font-weight: 800;
+    }
+    .brand-icon {
+      width: 42px;
+      height: 42px;
+      border-radius: 12px;
+      background: var(--grad);
+      display: grid;
+      place-items: center;
+      font-size: 22px;
+      box-shadow: 0 8px 20px var(--pri-glow);
+    }
+    .brand-sub { font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--pri); display: block; font-weight: 700; }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 12px 24px;
+      border-radius: 12px;
+      font-weight: 700;
+      font-size: 15px;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      border: 0;
+    }
+    .btn-admin {
+      background: var(--grad);
+      color: #ffffff;
+      box-shadow: 0 10px 25px rgba(168, 85, 247, 0.35);
+    }
+    .btn-admin:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 14px 30px rgba(168, 85, 247, 0.55);
+    }
+    .btn-ghost {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      color: var(--txt);
+    }
+    .btn-ghost:hover {
+      border-color: var(--pri);
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    /* Hero */
+    .hero {
+      padding: 70px 0 50px;
+      text-align: center;
+    }
+    .badge-admin {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 16px;
+      border-radius: 99px;
+      background: rgba(168, 85, 247, 0.15);
+      border: 1px solid rgba(168, 85, 247, 0.35);
+      color: #c084fc;
+      font-size: 13px;
+      font-weight: 700;
+      margin-bottom: 24px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    h1 {
+      font-size: clamp(34px, 5.5vw, 60px);
+      font-weight: 800;
+      line-height: 1.15;
+      margin-bottom: 20px;
+      background: linear-gradient(135deg, #ffffff 40%, #94a3b8 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .hero-sub {
+      font-size: clamp(16px, 2vw, 20px);
+      color: var(--txt-mut);
+      max-width: 760px;
+      margin: 0 auto 40px;
+    }
+
+    /* Access Card Box */
+    .access-box {
+      max-width: 720px;
+      margin: 0 auto 60px;
+      background: var(--card-bg);
+      border: 1px solid rgba(168, 85, 247, 0.3);
+      border-radius: 24px;
+      padding: 30px;
+      backdrop-filter: blur(16px);
+      box-shadow: 0 25px 60px rgba(0,0,0,0.6);
+      text-align: left;
+    }
+    .access-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      padding-bottom: 14px;
+    }
+    .access-header h3 { font-size: 20px; font-weight: 700; }
+    .access-url {
+      background: #030712;
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 12px;
+      padding: 14px 18px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      font-family: ui-monospace, SFMono-Regular, monospace;
+      color: #38bdf8;
+      font-size: 15px;
+      word-break: break-all;
+      margin-bottom: 20px;
+    }
+    .copy-btn {
+      background: rgba(56, 189, 248, 0.15);
+      border: 1px solid rgba(56, 189, 248, 0.3);
+      color: #38bdf8;
+      padding: 6px 12px;
+      border-radius: 8px;
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+    .copy-btn:hover { background: rgba(56, 189, 248, 0.3); }
+
+    /* Admin Direct Contact Bar */
+    .admin-contact-bar {
+      margin-top: 20px;
+      padding-top: 20px;
+      border-top: 1px solid rgba(255,255,255,0.08);
+    }
+    .admin-contact-bar label {
+      display: block;
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--txt-mut);
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+    .contact-row {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .contact-row input {
+      flex: 1;
+      min-width: 200px;
+      background: #030712;
+      border: 1px solid rgba(255,255,255,0.14);
+      border-radius: 10px;
+      padding: 12px 14px;
+      color: #fff;
+      font-size: 14px;
+      outline: none;
+    }
+    .contact-row input:focus {
+      border-color: var(--purple);
+    }
+
+    /* Modules Grid */
+    .modules { padding: 40px 0 70px; }
+    .sec-title {
+      text-align: center;
+      margin-bottom: 50px;
+    }
+    .sec-title h2 { font-size: clamp(28px, 4vw, 38px); font-weight: 800; margin-bottom: 10px; }
+    .sec-title p { color: var(--txt-mut); font-size: 16px; }
+
+    .grid-modules {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+      gap: 24px;
+    }
+    .card-mod {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 20px;
+      padding: 28px 24px;
+      backdrop-filter: blur(12px);
+      transition: all 0.3s ease;
+      position: relative;
+    }
+    .card-mod:hover {
+      transform: translateY(-4px);
+      border-color: var(--card-hover);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+    }
+    .mod-icon {
+      width: 52px;
+      height: 52px;
+      border-radius: 14px;
+      background: rgba(56, 189, 248, 0.12);
+      border: 1px solid rgba(56, 189, 248, 0.25);
+      display: grid;
+      place-items: center;
+      font-size: 26px;
+      margin-bottom: 18px;
+    }
+    .card-mod h3 { font-size: 19px; font-weight: 700; margin-bottom: 10px; }
+    .card-mod p { color: var(--txt-mut); font-size: 14px; line-height: 1.6; }
+
+    /* CTA Section */
+    .cta-admin {
+      padding: 80px 0;
+      text-align: center;
+    }
+    .cta-admin-box {
+      background: linear-gradient(135deg, rgba(168, 85, 247, 0.12), rgba(56, 189, 248, 0.12));
+      border: 1px solid rgba(168, 85, 247, 0.3);
+      border-radius: 28px;
+      padding: 50px 24px;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    .cta-admin-box h2 { font-size: 32px; font-weight: 800; margin-bottom: 16px; }
+    .cta-admin-box p { color: var(--txt-mut); margin-bottom: 30px; font-size: 16px; }
+
+    footer {
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      padding: 24px 0;
+      text-align: center;
+      color: var(--txt-mut);
+      font-size: 13px;
+    }
+
+    @media(max-width: 680px) {
+      .access-url { flex-direction: column; align-items: flex-start; }
+      .contact-row { flex-direction: column; }
+      .btn { width: 100%; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <div class="container nav-inner">
+      <div class="brand">
+        <div class="brand-icon">🛡️</div>
+        <div>
+          <span>Sand Contabilidade</span>
+          <span class="brand-sub">Gestão Administrativa</span>
+        </div>
+      </div>
+      <div>
+        <a href="https://sandcontabilidade.onrender.com/admin/" target="_blank" class="btn btn-admin">
+          Entrar no Painel 🔐
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero container">
+    <div class="badge-admin">Controle Total do Escritório Contábil</div>
+    <h1>Painel de Controle Centralizado<br>da Sand Contabilidade</h1>
+    <p class="hero-sub">
+      Gerencie todos os seus clientes MEI, Simples Nacional e outras categorias, emita cobranças com PIX e acompanhe chamados e arquivos em uma única plataforma na nuvem.
+    </p>
+
+    <!-- Caixa de Acesso Oficial do Admin -->
+    <div class="access-box">
+      <div class="access-header">
+        <h3>Endereço Oficial de Acesso do Administrador</h3>
+        <span style="font-size:12px; background:rgba(16, 185, 129, 0.2); color:#10b981; padding:4px 10px; border-radius:99px; font-weight:700;">Online</span>
+      </div>
+
+      <div class="access-url">
+        <span id="admin-url-text">https://sandcontabilidade.onrender.com/admin/</span>
+        <button class="copy-btn" id="copy-admin-url">Copiar Link</button>
+      </div>
+
+      <div style="display:flex; gap:12px; flex-wrap:wrap;">
+        <a href="https://sandcontabilidade.onrender.com/admin/" target="_blank" class="btn btn-admin" style="flex:1;">
+          🚀 Abrir Painel Administrativo Agora
+        </a>
+      </div>
+
+      <!-- Campo Livre para Configurar Contato Interno -->
+      <div class="admin-contact-bar">
+        <label>Telefone / WhatsApp de Suporte do Administrador (Editar Manualmente):</label>
+        <div class="contact-row">
+          <input type="text" id="admin-tel" placeholder="Ex: (11) 98888-7777" value="">
+          <button class="btn btn-ghost" id="save-tel">Salvar Contato</button>
+        </div>
+        <small style="color:var(--txt-mut); font-size:12px; margin-top:6px; display:block;">
+          O número fica gravado neste dispositivo para agilizar o contato com sua equipe ou clientes.
+        </small>
+      </div>
+    </div>
+  </section>
+
+  <!-- Recursos de Administração -->
+  <section class="modules container">
+    <div class="sec-title">
+      <h2>Módulos Completos de Administração</h2>
+      <p>Desenvolvido para atender todas as rotinas contábeis de forma ágil e segura.</p>
+    </div>
+
+    <div class="grid-modules">
+      <!-- Módulo 1 -->
+      <div class="card-mod">
+        <div class="mod-icon">🏢</div>
+        <h3>Cadastro de Usuários & Empresas</h3>
+        <p>Cadastre CNPJs com validação algorítmica, separe por regimes fiscais (MEI, Simples, Lucro Presumido/Real) e gere mensagens prontas de acesso com login e senha inicial provisória <code>123456</code>.</p>
+      </div>
+
+      <!-- Módulo 2 -->
+      <div class="card-mod">
+        <div class="mod-icon">💳</div>
+        <h3>Gestão de Boletos, PIX & PDF</h3>
+        <p>Crie cobranças mensais, informe código de barras ou chave <b>PIX copia e cola</b> e anexe a guia oficial em PDF para o cliente pagar direto no aplicativo.</p>
+      </div>
+
+      <!-- Módulo 3 -->
+      <div class="card-mod">
+        <div class="mod-icon">📁</div>
+        <h3>Envio & Recebimento de Arquivos</h3>
+        <p>Transfira declarações, balanços e folhas de pagamento diretamente para a pasta do cliente. Receba notas fiscais e extratos enviados por ele com limite de até 20MB.</p>
+      </div>
+
+      <!-- Módulo 4 -->
+      <div class="card-mod">
+        <div class="mod-icon">🎧</div>
+        <h3>Tratamento de Chamados</h3>
+        <p>Atenda as demandas com histórico completo. Altere os status (Aberto, Em análise, Aguardando cliente, Concluído) e insira observações orientativas em tempo real.</p>
+      </div>
+
+      <!-- Módulo 5 -->
+      <div class="card-mod">
+        <div class="mod-icon">📊</div>
+        <h3>Dashboard & Indicadores</h3>
+        <p>Visão clara de faturamento pendente vs. recebido, total de clientes ativos por categoria tributária e alertas de chamados aguardando resposta.</p>
+      </div>
+
+      <!-- Módulo 6 -->
+      <div class="card-mod">
+        <div class="mod-icon">🔒</div>
+        <h3>Segurança & Banco Supabase</h3>
+        <p>Persistência em nuvem robusta com Postgres e Storage privado. Proteção total de dados e isolamento restrito entre empresas clientes.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Rodapé Admin -->
+  <section class="cta-admin container">
+    <div class="cta-admin-box">
+      <h2>Pronto para assumir o controle?</h2>
+      <p>Acesse o painel com seu usuário e senha e gerencie seu escritório de qualquer lugar.</p>
+      <a href="https://sandcontabilidade.onrender.com/admin/" target="_blank" class="btn btn-admin" style="padding:16px 36px; font-size:16px;">
+        Entrar no Painel do Escritório 🔐
+      </a>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <p>© Sand Contabilidade — Sistema Administrativo Integrado. Painel restrito ao escritório.</p>
+    </div>
+  </footer>
+
+  <script>
+    // Copiar URL
+    const btnCopy = document.getElementById('copy-admin-url');
+    btnCopy.addEventListener('click', () => {
+      const url = document.getElementById('admin-url-text').innerText;
+      navigator.clipboard.writeText(url).then(() => {
+        btnCopy.innerText = 'Copiado! ✓';
+        setTimeout(() => btnCopy.innerText = 'Copiar Link', 2000);
+      });
+    });
+
+    // Salvar e recuperar telefone do Admin
+    const adminTel = document.getElementById('admin-tel');
+    const saveTel = document.getElementById('save-tel');
+    const saved = localStorage.getItem('sand_admin_tel');
+    if (saved) adminTel.value = saved;
+
+    saveTel.addEventListener('click', () => {
+      localStorage.setItem('sand_admin_tel', adminTel.value);
+      saveTel.innerText = 'Salvo! ✓';
+      setTimeout(() => saveTel.innerText = 'Salvar Contato', 2000);
+    });
+  </script>
+</body>
+</html>

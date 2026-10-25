@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portal do Cliente | Sand Contabilidade - Gestão Completa & Ágil</title>
+  <meta name="description" content="Conheça o aplicativo exclusivo para clientes Sand Contabilidade. Boletos, PIX, documentos e chamados em tempo real na palma da mão.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #070d19;
+      --card-bg: rgba(16, 27, 49, 0.7);
+      --card-border: rgba(45, 212, 167, 0.15);
+      --card-hover: rgba(45, 212, 167, 0.35);
+      --txt: #f1f5f9;
+      --txt-mut: #94a3b8;
+      --pri: #2dd4a7;
+      --pri-glow: rgba(45, 212, 167, 0.35);
+      --blue: #38bdf8;
+      --grad: linear-gradient(135deg, #2dd4a7 0%, #38bdf8 100%);
+      --grad-text: linear-gradient(135deg, #ffffff 30%, #94a3b8 100%);
+      --max-w: 1200px;
+    }
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family: 'Plus Jakarta Sans', 'Inter', sans-serif;
+      background: radial-gradient(1000px 600px at 50% -10%, rgba(56, 189, 248, 0.15), transparent 70%),
+                  radial-gradient(800px 500px at 90% 40%, rgba(45, 212, 167, 0.12), transparent 70%),
+                  var(--bg);
+      color: var(--txt);
+      min-height: 100vh;
+      overflow-x: hidden;
+      line-height: 1.6;
+    }
+    a { color: inherit; text-decoration: none; }
+    .container { max-width: var(--max-w); margin: 0 auto; padding: 0 24px; }
+
+    /* Header Nav */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(16px);
+      background: rgba(7, 13, 25, 0.75);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      padding: 16px 0;
+    }
+    .nav-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 20px;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+    }
+    .brand-icon {
+      width: 42px;
+      height: 42px;
+      border-radius: 12px;
+      background: var(--grad);
+      display: grid;
+      place-items: center;
+      font-size: 22px;
+      box-shadow: 0 8px 20px var(--pri-glow);
+    }
+    .brand-sub { font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--pri); display: block; font-weight: 700; }
+    .nav-btns { display: flex; gap: 12px; align-items: center; }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 12px 24px;
+      border-radius: 12px;
+      font-weight: 700;
+      font-size: 15px;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      border: 0;
+    }
+    .btn-primary {
+      background: var(--grad);
+      color: #03131a;
+      box-shadow: 0 10px 25px var(--pri-glow);
+    }
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 14px 30px rgba(45, 212, 167, 0.5);
+    }
+    .btn-ghost {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      color: var(--txt);
+    }
+    .btn-ghost:hover {
+      background: rgba(255, 255, 255, 0.1);
+      border-color: var(--pri);
+    }
+
+    /* Hero */
+    .hero {
+      padding: 70px 0 50px;
+      text-align: center;
+      position: relative;
+    }
+    .badge-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 16px;
+      border-radius: 99px;
+      background: rgba(45, 212, 167, 0.12);
+      border: 1px solid rgba(45, 212, 167, 0.3);
+      color: var(--pri);
+      font-size: 13px;
+      font-weight: 700;
+      margin-bottom: 24px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    h1 {
+      font-size: clamp(34px, 5.5vw, 62px);
+      font-weight: 800;
+      line-height: 1.15;
+      letter-spacing: -0.03em;
+      margin-bottom: 20px;
+      background: var(--grad-text);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .hero-sub {
+      font-size: clamp(16px, 2vw, 20px);
+      color: var(--txt-mut);
+      max-width: 720px;
+      margin: 0 auto 36px;
+    }
+
+    /* Input WhatsApp / Contato Rápido no Topo */
+    .contact-bar {
+      max-width: 650px;
+      margin: 0 auto 50px;
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 20px;
+      padding: 16px 20px;
+      backdrop-filter: blur(14px);
+      box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+    }
+    .contact-bar-label {
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--pri);
+      font-weight: 700;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+    }
+    .contact-inputs {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .contact-inputs input {
+      flex: 1;
+      min-width: 220px;
+      background: #091322;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 12px;
+      padding: 14px 16px;
+      color: #fff;
+      font-size: 15px;
+      font-family: inherit;
+      outline: none;
+      transition: 0.2s;
+    }
+    .contact-inputs input:focus {
+      border-color: var(--pri);
+      box-shadow: 0 0 0 3px rgba(45, 212, 167, 0.2);
+    }
+    .contact-inputs .btn {
+      white-space: nowrap;
+    }
+
+    /* Recursos Grid */
+    .features {
+      padding: 50px 0 70px;
+    }
+    .sec-header {
+      text-align: center;
+      margin-bottom: 50px;
+    }
+    .sec-header h2 {
+      font-size: clamp(28px, 4vw, 42px);
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      margin-bottom: 12px;
+    }
+    .sec-header p {
+      color: var(--txt-mut);
+      font-size: 17px;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    .grid-features {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+    }
+    .card-f {
+      background: var(--card-bg);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 20px;
+      padding: 32px 24px;
+      backdrop-filter: blur(12px);
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    .card-f::before {
+      content: "";
+      position: absolute;
+      top: 0; left: 0; right: 0; height: 3px;
+      background: var(--grad);
+      opacity: 0;
+      transition: 0.3s;
+    }
+    .card-f:hover {
+      transform: translateY(-5px);
+      border-color: var(--card-hover);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+    }
+    .card-f:hover::before { opacity: 1; }
+    .icon-box {
+      width: 56px;
+      height: 56px;
+      border-radius: 16px;
+      background: rgba(45, 212, 167, 0.12);
+      border: 1px solid rgba(45, 212, 167, 0.25);
+      display: grid;
+      place-items: center;
+      font-size: 28px;
+      margin-bottom: 20px;
+    }
+    .card-f h3 {
+      font-size: 20px;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+    .card-f p {
+      color: var(--txt-mut);
+      font-size: 15px;
+      line-height: 1.6;
+    }
+
+    /* Como Funciona */
+    .steps-sec {
+      padding: 60px 0;
+      background: rgba(16, 27, 49, 0.3);
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    }
+    .steps-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 30px;
+      margin-top: 40px;
+    }
+    .step-card {
+      text-align: center;
+      position: relative;
+    }
+    .step-num {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: var(--grad);
+      color: #03131a;
+      font-weight: 800;
+      font-size: 20px;
+      display: grid;
+      place-items: center;
+      margin: 0 auto 18px;
+      box-shadow: 0 6px 18px var(--pri-glow);
+    }
+    .step-card h4 { font-size: 18px; font-weight: 700; margin-bottom: 8px; }
+    .step-card p { color: var(--txt-mut); font-size: 14px; }
+
+    /* CTA Final */
+    .cta-sec {
+      padding: 90px 0;
+      text-align: center;
+      position: relative;
+    }
+    .cta-card {
+      background: radial-gradient(800px 400px at 50% 0%, rgba(45, 212, 167, 0.18), transparent 70%),
+                  var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 28px;
+      padding: clamp(36px, 6vw, 64px) 24px;
+      max-width: 900px;
+      margin: 0 auto;
+      box-shadow: 0 30px 80px rgba(0,0,0,0.6);
+    }
+    .cta-card h2 {
+      font-size: clamp(28px, 4.5vw, 46px);
+      font-weight: 800;
+      margin-bottom: 16px;
+      letter-spacing: -0.02em;
+    }
+    .cta-card p {
+      color: var(--txt-mut);
+      font-size: 18px;
+      max-width: 600px;
+      margin: 0 auto 32px;
+    }
+    .cta-btns {
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    footer {
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      padding: 30px 0;
+      text-align: center;
+      color: var(--txt-mut);
+      font-size: 14px;
+    }
+
+    @media(max-width: 680px) {
+      .contact-inputs { flex-direction: column; }
+      .contact-inputs .btn { width: 100%; }
+      .btn { width: 100%; }
+      .nav-btns { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <div class="container nav-inner">
+      <div class="brand">
+        <div class="brand-icon">📊</div>
+        <div>
+          <span>Sand Contabilidade</span>
+          <span class="brand-sub">Portal do Cliente</span>
+        </div>
+      </div>
+      <div class="nav-btns">
+        <a href="https://sandcontabilidade.onrender.com/" target="_blank" class="btn btn-ghost">Acessar App</a>
+        <a href="#contato" class="btn btn-primary">Fale Conosco</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero container">
+    <div class="badge-pill">⚡ Revolução na Contabilidade da sua Empresa</div>
+    <h1>Sua empresa 100% atualizada,<br>sem burocracia e direto no celular</h1>
+    <p class="hero-sub">
+      Acompanhe boletos com PIX automático, troque guias fiscais e abra chamados com histórico completo em tempo real. Feito para MEI, Simples Nacional e todas categorias.
+    </p>
+
+    <!-- Barra de Contato Rápido com Campo Editável -->
+    <div class="contact-bar" id="contato">
+      <div class="contact-bar-label">
+        <span>📲</span> Atendimento Personalizado & Informações
+      </div>
+      <div class="contact-inputs">
+        <input type="text" id="tel-input" placeholder="Digite seu WhatsApp ou Contato (ex: (11) 99999-9999)" value="">
+        <button class="btn btn-primary" id="btn-whats">Chamar no WhatsApp</button>
+      </div>
+      <small style="color:var(--txt-mut); font-size:12px; margin-top:10px; display:block;">
+        Insira o número acima para contato direto com nosso escritório ou clique abaixo para abrir o portal.
+      </small>
+    </div>
+  </section>
+
+  <!-- Funcionalidades em Destaque -->
+  <section class="features container">
+    <div class="sec-header">
+      <h2>Tudo que sua empresa precisa em um só lugar</h2>
+      <p>Esqueça os e-mails perdidos e mensagens soltas no WhatsApp. Tenha total independência e organização.</p>
+    </div>
+
+    <div class="grid-features">
+      <!-- 1 -->
+      <div class="card-f">
+        <div class="icon-box">💳</div>
+        <h3>Boletos & Pagamento Flexível</h3>
+        <p>Acesse suas guias e honorários a vencer, copie o código de barras, pague via <b>PIX copia e cola</b> em 1 clique ou baixe o PDF original para arquivo.</p>
+      </div>
+
+      <!-- 2 -->
+      <div class="card-f">
+        <div class="icon-box">📁</div>
+        <h3>Troca Segura de Documentos</h3>
+        <p>Envie extratos, notas fiscais e comprovantes de até 20MB em segundos. Acesse guias de impostos, certidões e declarações disponibilizadas pelo escritório.</p>
+      </div>
+
+      <!-- 3 -->
+      <div class="card-f">
+        <div class="icon-box">🎧</div>
+        <h3>Chamados com Status e Observação</h3>
+        <p>Precisa de certidão, folha de pagamento ou alteração contratual? Abra um chamado no app e acompanhe em tempo real as observações e o status de tratamento.</p>
+      </div>
+
+      <!-- 4 -->
+      <div class="card-f">
+        <div class="icon-box">🔒</div>
+        <h3>Acesso Individual & Protegido</h3>
+        <p>Login simples usando seu <b>CNPJ</b> e senha provisória inicial <code>123456</code>. Cada usuário só visualiza os dados e histórico da própria empresa.</p>
+      </div>
+
+      <!-- 5 -->
+      <div class="card-f">
+        <div class="icon-box">📱</div>
+        <h3>Totalmente Adaptado ao Celular</h3>
+        <p>Interface moderna estilo PWA que se ajusta com perfeição à tela do seu smartphone ou tablet, com cartões organizados e resposta instantânea.</p>
+      </div>
+
+      <!-- 6 -->
+      <div class="card-f">
+        <div class="icon-box">⏰</div>
+        <h3>Alertas de Vencimento</h3>
+        <p>Fique sempre em dia com o fisco e evite multas ou encargos com resumo inteligente de vencimentos na página inicial do seu aplicativo.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Passo a Passo -->
+  <section class="steps-sec">
+    <div class="container">
+      <div class="sec-header">
+        <h2>Como funciona o seu acesso</h2>
+        <p>Começar a usar o aplicativo do escritório é extremamente simples e rápido.</p>
+      </div>
+
+      <div class="steps-grid">
+        <div class="step-card">
+          <div class="step-num">1</div>
+          <h4>Cadastro Ativado</h4>
+          <p>O escritório realiza o cadastro do seu CNPJ e envia seu link oficial de acesso.</p>
+        </div>
+        <div class="step-card">
+          <div class="step-num">2</div>
+          <h4>Login com CNPJ</h4>
+          <p>Acesse informando seu CNPJ e a senha inicial provisória <code>123456</code>.</p>
+        </div>
+        <div class="step-card">
+          <div class="step-num">3</div>
+          <h4>Controle Total</h4>
+          <p>Pronto! Visualize boletos, envie anexos e acompanhe chamados sem complicações.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Final -->
+  <section class="cta-sec container">
+    <div class="cta-card">
+      <h2>Pronto para modernizar a rotina contábil da sua empresa?</h2>
+      <p>Entre em contato hoje mesmo ou acesse o aplicativo com suas credenciais.</p>
+      <div class="cta-btns">
+        <a href="https://sandcontabilidade.onrender.com/" target="_blank" class="btn btn-primary" style="font-size:16px; padding:16px 36px;">
+          🚀 Acessar o Portal do Cliente
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <p>© Sand Contabilidade — Todos os direitos reservados. Solução completa para MEI, Simples Nacional e Geral.</p>
+    </div>
+  </footer>
+
+  <script>
+    const telInput = document.getElementById('tel-input');
+    const btnWhats = document.getElementById('btn-whats');
+
+    // Recupera se houver salvo no navegador
+    const savedTel = localStorage.getItem('sand_cliente_tel');
+    if (savedTel) telInput.value = savedTel;
+
+    telInput.addEventListener('input', () => {
+      localStorage.setItem('sand_cliente_tel', telInput.value);
+    });
+
+    btnWhats.addEventListener('click', () => {
+      const raw = telInput.value.replace(/\D/g, '');
+      const defaultNumber = raw || '5511999999999'; // número padrão caso vazio
+      const msg = encodeURIComponent("Olá! Gostaria de mais informações sobre os serviços de contabilidade e o aplicativo do cliente.");
+      window.open(`https://wa.me/${defaultNumber.startsWith('55') ? defaultNumber : '55' + defaultNumber}?text=${msg}`, '_blank');
+    });
+  </script>
+</body>
+</html>
